@@ -33,6 +33,10 @@ bool SocketCanStream::connect() {
     return false;
   }
 
+  // The configuration option determins whether CANFD frames
+  // may be sent or received. By default, this option is disabled.
+  device->setConfigurationParameter(QCanBusDevice::CanFdKey, true);
+
   if (!device->connectDevice()) {
     qDebug() << "Failed to connect to device";
     return false;
